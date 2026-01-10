@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+:root {
+    font-family: 'Poppins', sans-serif;
+}
+
+::-ms-reveal {
+    display: none;
+}
