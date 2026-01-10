@@ -3,6 +3,10 @@
 
 :root {
     font-family: 'Poppins', sans-serif;
+  --ui-primary: black;
+}
+.dark {
+  --ui-primary: white;
 }
 
 ::-ms-reveal {
