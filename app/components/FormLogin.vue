@@ -13,7 +13,7 @@ const form = reactive({
     :state="form"
     :schema="loginSchema"
     class="border border-accented rounded-lg p-5 space-y-4 bg-white"
-    @submit="login(form)"
+    @submit.prevent="login(form)"
   >
     <p class="font-semibold text-2xl text-center">
       Login
