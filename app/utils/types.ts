@@ -10,3 +10,15 @@ export interface RegisterForm {
   password: string
   passwordConfirmation: string
 }
+
+// Server Response
+export interface Task {
+  id: string
+  title: string
+  description: string
+  category: string
+  priority: string
+  asignee: string
+  finishedAt: Date
+  duration: number
+}

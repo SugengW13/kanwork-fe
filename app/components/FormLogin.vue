@@ -23,7 +23,7 @@ const form = reactive({
 
     <u-form-field
       required
-      size="xl"
+      size="lg"
       label="Email or Username"
       name="emailOrUsername"
     >
@@ -36,7 +36,7 @@ const form = reactive({
 
     <u-form-field
       required
-      size="xl"
+      size="lg"
       label="Password"
       name="password"
     >
@@ -62,7 +62,7 @@ const form = reactive({
 
     <u-button
       block
-      size="xl"
+      size="lg"
       label="Login"
       type="submit"
     />
