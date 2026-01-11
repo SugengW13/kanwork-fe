@@ -40,7 +40,7 @@ const props = defineProps({
       <div class="flex space-x-4 text-sm font-medium">
         <p>Asignee: {{ props.task.asignee }}</p>
         <p>Finished at: {{ format(props.task.finishedAt, 'dd/MM/yyyy HH:mm') }}</p>
-        <p>Duration: {{ props.task.duration }}</p>
+        <p>Duration: {{ secondsToDuration(props.task.duration) }}</p>
       </div>
     </div>
 
