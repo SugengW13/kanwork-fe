@@ -3,6 +3,8 @@
 
 <template>
   <div class="h-dvh flex flex-col relative bg-gray-50">
+    <task-detail-modal />
+
     <layout-header />
 
     <div class="p-10 relative grow min-h-0 flex flex-col">

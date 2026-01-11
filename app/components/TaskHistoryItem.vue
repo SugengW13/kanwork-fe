@@ -5,12 +5,15 @@ import type { PropType } from 'vue'
 const props = defineProps({
   task: Object as PropType<Task | null>,
 })
+
+const { isOpenModal } = useTask()
 </script>
 
 <template>
   <div
     v-if="props.task"
     class="border border-accented rounded-lg p-4 space-x-3 flex items-center cursor-pointer hover:bg-black/5 transition"
+    @click="isOpenModal.detail = true"
   >
     <div class="grow space-y-3 overflow-hidden">
       <div class="flex items-center space-x-3">
