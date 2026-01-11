@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const $route = useRoute()
 const $router = useRouter()
-const { tasks } = useReporting()
+const { tasks, getTasks } = useDashboard()
 
 const selectedType = ref<'WEEKLY' | 'MONTHLY'>('WEEKLY')
 
@@ -11,8 +11,9 @@ watch(selectedType, () => {
   })
 }, { immediate: true })
 
-onMounted(() => {
+onMounted(async () => {
   selectedType.value = ($route.query.selected_type as 'WEEKLY' | 'MONTHLY') || 'WEEKLY'
+  await getTasks()
 })
 </script>
 
@@ -76,7 +77,7 @@ onMounted(() => {
         >
           <div class="space-y-5 overflow-y-auto grow min-h-0">
             <item-task-history
-              v-for="(task, i) in tasks.toSpliced(3)"
+              v-for="(task, i) in tasks"
               :key="`task-${task.id || i}`"
               :task="task"
             />
@@ -86,7 +87,11 @@ onMounted(() => {
         <item-report
           title="Tasks by Category"
           icon="material-symbols:pie-chart-outline"
-        />
+        >
+          <div class="flex flex-col items-center justify-center grow overflow-y-auto">
+            <chart-task />
+          </div>
+        </item-report>
       </div>
     </div>
   </div>
