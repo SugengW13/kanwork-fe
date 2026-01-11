@@ -1,4 +1,7 @@
 <script setp lang="ts">
+definePageMeta({
+  layout: false,
+})
 </script>
 
 <template>

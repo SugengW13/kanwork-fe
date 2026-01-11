@@ -19,6 +19,7 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.2.51",
     "@nuxt/eslint": "^1.12.1",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3"
