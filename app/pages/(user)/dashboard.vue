@@ -1,18 +1,33 @@
 <script setup lang="ts">
+import { format } from 'date-fns'
+
 const $route = useRoute()
 const $router = useRouter()
 const { tasks, getTasks } = useDashboard()
 
-const selectedType = ref<'WEEKLY' | 'MONTHLY'>('WEEKLY')
+const date = ref<{
+  start: undefined | Date
+  end: undefined | Date
+}>({
+  start: undefined,
+  end: undefined,
+})
 
-watch(selectedType, () => {
-  $router.replace({
-    query: { selected_type: selectedType.value },
-  })
-}, { immediate: true })
+watch(date, ({ start, end }) => {
+  $router.replace({ query: {
+    start: start ? format(start, 'MM-dd-yyyy') : '',
+    end: end ? format(end, 'MM-dd-yyyy') : '',
+  } })
+}, { deep: true })
 
 onMounted(async () => {
-  selectedType.value = ($route.query.selected_type as 'WEEKLY' | 'MONTHLY') || 'WEEKLY'
+  const { start, end } = $route.query as { start: string, end: string }
+
+  if (start || end) {
+    date.value.start = new Date(start)
+    date.value.end = new Date(end)
+  }
+
   await getTasks()
 })
 </script>
@@ -21,7 +36,10 @@ onMounted(async () => {
   <div class="space-y-8 flex flex-col h-full">
     <page-header title="Dashboard">
       <template #suffix>
-        <date-range-picker class="w-xs" />
+        <date-range-picker
+          v-model="date"
+          class="w-xs"
+        />
       </template>
     </page-header>
 
