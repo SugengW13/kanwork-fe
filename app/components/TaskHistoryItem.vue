@@ -23,12 +23,6 @@ const { isOpenModal } = useTask()
 
         <u-badge
           variant="soft"
-          :label="props.task.category"
-          class="rounded-full"
-        />
-
-        <u-badge
-          variant="soft"
           :label="props.task.priority"
           class="rounded-full"
         />

@@ -19,25 +19,11 @@ onMounted(async () => {
 
 <template>
   <div class="space-y-8 flex flex-col h-full">
-    <div class="flex justify-between items-center">
-      <p class="text-2xl font-semibold">
-        Dashboard
-      </p>
-
-      <u-field-group size="lg">
-        <u-button
-          label="Weekly"
-          :variant="selectedType === 'WEEKLY' ? 'solid' : 'outline'"
-          @click="selectedType = 'WEEKLY'"
-        />
-
-        <u-button
-          label="Monthly"
-          :variant="selectedType === 'MONTHLY' ? 'solid' : 'outline'"
-          @click="selectedType = 'MONTHLY'"
-        />
-      </u-field-group>
-    </div>
+    <page-header title="Dashboard">
+      <template #suffix>
+        <date-range-picker class="w-xs" />
+      </template>
+    </page-header>
 
     <div class="space-y-8 flex flex-col min-h-0 grow">
       <div class="grid grid-cols-3 gap-8">
@@ -85,7 +71,7 @@ onMounted(async () => {
         </report-item>
 
         <report-item
-          title="Tasks by Category"
+          title="Tasks by Priority"
           icon="material-symbols:pie-chart-outline"
         >
           <div class="flex flex-col items-center justify-center grow overflow-y-auto">

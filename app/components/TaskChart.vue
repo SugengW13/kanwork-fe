@@ -7,7 +7,7 @@ onMounted(() => {
   new Chart(chartTask.value, {
     type: 'pie',
     data: {
-      labels: ['Category 1', 'Category 2', 'Category 3'],
+      labels: ['Low', 'Medium', 'High'],
       datasets: [
         { data: [10, 10, 10] },
       ],

@@ -16,8 +16,8 @@ export interface Task {
   id: string
   title: string
   description: string
-  category: string
-  priority: string
+  status: 'Todo' | 'Doing' | 'Done'
+  priority: 'Low' | 'Medium' | 'High'
   asignee: string
   finishedAt: Date
   duration: number

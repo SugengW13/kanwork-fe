@@ -33,19 +33,11 @@ import { format } from 'date-fns'
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, tempora ad provident eveniet odit quo.
     </p>
 
-    <div class="space-x-3">
-      <u-badge
-        variant="soft"
-        label="Category"
-        class="rounded-full"
-      />
-
-      <u-badge
-        variant="soft"
-        label="Priority"
-        class="rounded-full"
-      />
-    </div>
+    <u-badge
+      variant="soft"
+      label="Priority"
+      class="rounded-full"
+    />
 
     <div class="space-y-4 text-sm">
       <p>Asginee: John Doe</p>

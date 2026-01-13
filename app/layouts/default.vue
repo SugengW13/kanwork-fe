@@ -5,7 +5,7 @@
   <div class="h-dvh flex flex-col relative bg-gray-50">
     <task-detail-modal />
 
-    <layout-header />
+    <layout-headbar />
 
     <div class="p-10 relative grow min-h-0 flex flex-col">
       <layout-sidebar />
