@@ -1,5 +1,10 @@
 import { formatDuration } from 'date-fns'
 
+export function isValidDate(str: string) {
+  const date = new Date(str)
+  return !isNaN(date.valueOf())
+}
+
 export function secondsToDuration(s: number) {
   const minuteInSeconds = 60
   const hourInSeconds = 60 * minuteInSeconds

@@ -23,10 +23,13 @@ watch(date, ({ start, end }) => {
 onMounted(async () => {
   const { start, end } = $route.query as { start: string, end: string }
 
-  if (start || end) {
-    date.value.start = new Date(start)
-    date.value.end = new Date(end)
-  }
+  date.value.start = isValidDate(start)
+    ? new Date(start)
+    : undefined
+
+  date.value.end = isValidDate(end)
+    ? new Date(end)
+    : undefined
 
   await getTasks()
 })
