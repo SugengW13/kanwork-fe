@@ -54,7 +54,7 @@ const isOpenCollapsible = ref(false)
         <template #content>
           <div class="space-y-3 flex flex-col">
             <nuxt-link
-              v-for="i in 5"
+              v-for="i in 3"
               :key="`team-${i}`"
               to="#"
             >

@@ -33,15 +33,25 @@ import { format } from 'date-fns'
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, tempora ad provident eveniet odit quo.
     </p>
 
-    <u-badge
-      variant="soft"
-      label="Priority"
-      class="rounded-full"
-    />
+    <div class="space-x-2">
+      <u-badge
+        variant="soft"
+        label="Status"
+        class="rounded-full"
+      />
 
-    <div class="space-y-4 text-sm">
+      <u-badge
+        variant="soft"
+        label="Priority"
+        class="rounded-full"
+      />
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 text-sm">
       <p>Asginee: John Doe</p>
       <p>Deadline: {{ format(new Date(), 'dd/MM/yyyy HH:mm') }}</p>
+      <p>Started At: {{ format(new Date(), 'dd/MM/yyyy HH:mm') }}</p>
+      <p>Finished At: {{ format(new Date(), 'dd/MM/yyyy HH:mm') }}</p>
     </div>
   </div>
 </template>
