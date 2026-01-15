@@ -44,7 +44,7 @@ const $route = useRoute()
             :class="{ 'bg-primary/5': $route.path === '/teams' }"
           >
             <u-icon
-              name="material-symbols:groups-outline-rounded"
+              name="material-symbols:team-dashboard-outline"
               size="20"
             />
 

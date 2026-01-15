@@ -33,7 +33,7 @@ onMounted(async () => {
 
         <u-button
           size="lg"
-          label="Create"
+          label="Add New"
           trailing-icon="material-symbols:add-rounded"
           @click="onClickCreate"
         />

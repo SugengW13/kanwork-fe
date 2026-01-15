@@ -15,7 +15,8 @@ export const useTeam = () => {
   const selectedTeam = useState<null | Team>('team:selected-team', () => null)
 
   const getTeams = async () => {
-    // Fetch Teams
+    teams.value = []
+
     for (let i = 0; i < 5; i++) {
       teams.value.push({
         id: `${i + 1}`,

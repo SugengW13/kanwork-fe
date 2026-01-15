@@ -8,6 +8,8 @@ const props = defineProps({
   team: Object as PropType<Team>,
 })
 
+const $router = useRouter()
+
 const onClickUpdate = () => {
   selectedTeam.value = props.team ?? null
   isOpenModal.value.form = true
@@ -66,8 +68,9 @@ const items: DropdownMenuItem[] = [
         block
         size="lg"
         variant="outline"
-        label="Settings"
-        leading-icon="material-symbols:settings-outline-rounded"
+        label="Contributors"
+        leading-icon="material-symbols:group-outline-rounded"
+        @click="$router.push(`/teams/${props.team.id}/contributors`)"
       />
 
       <u-button
@@ -75,6 +78,7 @@ const items: DropdownMenuItem[] = [
         size="lg"
         label="View Tasks"
         leading-icon="material-symbols:file-copy-outline-rounded"
+        @click="$router.push(`/teams/${props.team.id}/tasks`)"
       />
     </div>
   </div>

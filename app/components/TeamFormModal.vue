@@ -11,7 +11,7 @@ const { isOpenModal, selectedTeam } = useTeam()
       <div class="p-5 space-y-4">
         <div class="flex items-center justify-between">
           <p class="text-xl font-semibold">
-            {{ selectedTeam ? 'Update' : 'Create' }} Team
+            {{ selectedTeam ? 'Update' : 'Add New' }} Team
           </p>
 
           <u-button
