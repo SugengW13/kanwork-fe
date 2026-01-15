@@ -3,7 +3,7 @@
 
 <template>
   <div class="h-dvh flex flex-col relative bg-gray-50">
-    <task-detail-modal />
+    <layout-modal />
 
     <layout-headbar />
 

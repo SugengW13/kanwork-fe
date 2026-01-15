@@ -1,23 +1,47 @@
 <script setup lang="ts">
-const items = [
+import type { DropdownMenuItem } from '@nuxt/ui'
+import type { PropType } from 'vue'
+
+const { isOpenModal, selectedTeam } = useTeam()
+
+const props = defineProps({
+  team: Object as PropType<Team>,
+})
+
+const onClickUpdate = () => {
+  selectedTeam.value = props.team ?? null
+  isOpenModal.value.form = true
+}
+
+const onClickDelete = () => {
+  selectedTeam.value = props.team ?? null
+  isOpenModal.value.delete = true
+}
+
+const items: DropdownMenuItem[] = [
   {
     label: 'Update',
-    color: 'info',
+    color: 'neutral',
     icon: 'material-symbols:edit-outline-rounded',
+    onSelect: onClickUpdate,
   },
   {
     label: 'Delete',
     color: 'error',
     icon: 'material-symbols:delete-outline-rounded',
+    onSelect: onClickDelete,
   },
 ]
 </script>
 
 <template>
-  <div class="border h-60 border-accented rounded-lg bg-white p-5 space-y-4 flex flex-col">
+  <div
+    v-if="props.team"
+    class="border h-60 border-accented rounded-lg bg-white p-5 space-y-4 flex flex-col"
+  >
     <div class="flex justify-between items-center">
       <p class="text-xl font-semibold">
-        Team Name
+        {{ props.team.name }}
       </p>
 
       <u-dropdown-menu
@@ -25,6 +49,7 @@ const items = [
         :items="items"
       >
         <u-button
+          color="neutral"
           variant="ghost"
           icon="material-symbols:more-vert"
           class="rounded-full"
@@ -33,7 +58,7 @@ const items = [
     </div>
 
     <p class="text-sm text-justify text-gray-500 grow min-h-0 overflow-hidden text-ellipsis">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem cupiditate voluptas, adipisci soluta minima autem dolores, recusandae dolor iste mollitia dolorem porro, reiciendis aliquid perferendis.
+      {{ props.team.description }}
     </p>
 
     <div class="grid grid-cols-2 gap-4">

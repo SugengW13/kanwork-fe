@@ -1,4 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { isOpenModal, teams, selectedTeam, getTeams } = useTeam()
+
+const onClickCreate = () => {
+  selectedTeam.value = null
+  isOpenModal.value.form = true
+}
+
+onMounted(async () => {
+  await getTeams()
+})
+</script>
 
 <template>
   <div class="space-y-8 flex flex-col h-full">
@@ -22,16 +33,17 @@
 
         <u-button
           size="lg"
-          label="Add New"
+          label="Create"
           trailing-icon="material-symbols:add-rounded"
-          @click=""
+          @click="onClickCreate"
         />
       </div>
 
       <div class="grid grid-cols-3 gap-8 overflow-y-auto">
         <team-item
-          v-for="i in 10"
-          :key="`team-${i}`"
+          v-for="team in teams"
+          :key="`team-${team.id}`"
+          :team="team"
         />
       </div>
     </div>

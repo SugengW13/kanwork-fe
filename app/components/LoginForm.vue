@@ -3,7 +3,7 @@ const $router = useRouter()
 const { login } = useAuth()
 
 const form = reactive({
-  emailOrUsername: '',
+  email: '',
   password: '',
 })
 </script>
@@ -24,12 +24,12 @@ const form = reactive({
     <u-form-field
       required
       size="lg"
-      label="Email or Username"
-      name="emailOrUsername"
+      label="Email"
+      name="email"
     >
       <u-input
-        v-model="form.emailOrUsername"
-        placeholder="Enter your email or username"
+        v-model="form.email"
+        placeholder="Enter your email"
         class="w-full"
       />
     </u-form-field>

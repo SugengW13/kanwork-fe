@@ -8,7 +8,7 @@ const $route = useRoute()
   <div
     class="absolute inset-0 transition-all duration-300 z-10"
     :class="{
-      'backdrop-blur-xs bg-black/25': isOpen,
+      'backdrop-blur-xs bg-black/50': isOpen,
       'opacity-0 pointer-events-none': !isOpen,
     }"
     @click.self="isOpen = false"
@@ -52,7 +52,7 @@ const $route = useRoute()
           </div>
         </nuxt-link>
 
-        <div class="space-y-3 flex flex-col">
+        <!-- <div class="space-y-3 flex flex-col">
           <nuxt-link
             v-for="i in 3"
             :key="`team-${i}`"
@@ -64,7 +64,7 @@ const $route = useRoute()
               <p class="text-lg font-medium">Team {{ i }}</p>
             </div>
           </nuxt-link>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

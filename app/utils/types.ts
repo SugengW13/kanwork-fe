@@ -1,6 +1,6 @@
 // Form Types
 export interface LoginForm {
-  emailOrUsername: string
+  email: string
   password: string
 }
 
@@ -11,7 +11,18 @@ export interface RegisterForm {
   passwordConfirmation: string
 }
 
+export interface TeamForm {
+  name: string
+  description: undefined | string
+}
+
 // Server Response
+export interface Team {
+  id: string
+  name: string
+  description: string
+}
+
 export interface Task {
   id: string
   title: string

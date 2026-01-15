@@ -13,7 +13,7 @@ import { format } from 'date-fns'
       <div class="flex space-x-3">
         <u-button
           size="lg"
-          color="info"
+          color="neutral"
           variant="outline"
           label="Update"
           leading-icon="material-symbols:edit-outline-rounded"
