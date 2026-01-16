@@ -12,7 +12,7 @@ export const useContributor = () => {
 
   const contributors = useState<Contributor[]>('contributor:contributors', () => [])
 
-  const selectedContributor = useState<null | Team>('contributor:selected-contributor', () => null)
+  const selectedContributor = useState<null | Contributor>('contributor:selected-contributor', () => null)
 
   const getContributors = async () => {
     contributors.value = []
