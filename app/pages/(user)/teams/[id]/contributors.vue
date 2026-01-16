@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const $router = useRouter()
-const { isOpenModal, contributors, selectedContributor, getContributors } = useContributor()
+const { isOpenModal, selectedContributor, getContributors } = useContributor()
 
 const onClickCreate = () => {
   selectedContributor.value = null
@@ -14,7 +14,7 @@ onMounted(async () => {
 
 <template>
   <div class="space-y-8 h-full flex flex-col">
-    <page-header title="Team Name - Contributors">
+    <page-header title="Team - Contributors">
       <template #prefix>
         <u-button
           size="lg"
@@ -25,7 +25,7 @@ onMounted(async () => {
       </template>
     </page-header>
 
-    <div class="space-y-8 flex flex-col grow">
+    <div class="space-y-8 flex flex-col grow min-h-0">
       <div class="flex justify-between">
         <div class="space-x-5">
           <u-input
@@ -49,10 +49,8 @@ onMounted(async () => {
         />
       </div>
 
-      <div class="space-y-8 grow flex flex-col justify-between items-center">
-        <div class="w-full bg-white rounded-lg border border-accented overflow-hidden">
-          <u-table :data="contributors" />
-        </div>
+      <div class="space-y-8 grow flex flex-col justify-between items-center overflow-y-hidden">
+        <contributor-table class="" />
 
         <u-pagination variant="ghost" />
       </div>

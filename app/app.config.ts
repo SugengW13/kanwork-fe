@@ -9,5 +9,10 @@ export default defineAppConfig({
         overlay: 'bg-black/50! backdrop-blur-xs',
       },
     },
+    table: {
+      slots: {
+        th: 'backdrop-blur-xs',
+      },
+    },
   },
 })
