@@ -1,8 +1,24 @@
-import { formatDuration } from 'date-fns'
+import { format, formatDuration } from 'date-fns'
 
-export function isValidDate(str: string) {
+export function isValidDate(str: number | string) {
   const date = new Date(str)
   return !isNaN(date.valueOf())
+}
+
+export function formatDate(date: null | undefined | number | string | Date, pattern: string) {
+  if (!date) return '-'
+
+  if (date instanceof Date) {
+    return format(date, pattern)
+  }
+
+  if (!isValidDate(date)) return '-'
+
+  if (typeof date === 'string' || typeof date === 'number') {
+    return format(new Date(date), pattern)
+  }
+
+  return '-'
 }
 
 export function secondsToDuration(s: number) {

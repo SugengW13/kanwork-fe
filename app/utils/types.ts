@@ -11,41 +11,18 @@ export interface RegisterForm {
   passwordConfirmation: string
 }
 
-export interface TeamForm {
-  name: string
-  description: undefined | string
-}
-
-export interface ContributorForm {
-  username: string
-  email: string
-  password: string
-  passwordConfirmation: string
-}
-
 // Server Response
-export interface Team {
-  id: string
-  name: string
-  description: string
-}
+export type TaskStatusType = 'TODO' | 'DOING' | 'DONE'
+export type TaskPriorityType = 'LOW' | 'MEDIUM' | 'HIGH'
 
 export interface Task {
   id: string
   title: string
-  description: string
-  status: 'Todo' | 'Doing' | 'Done'
-  priority: 'Low' | 'Medium' | 'High'
-  asignee: string
+  description: null | string
+  status: TaskStatusType
+  priority: TaskPriorityType
   deadlineAt: Date
-  startedAt: Date
-  finishedAt: Date
+  startedAt: null | Date
+  finishedAt: null | Date
   duration: number
-}
-
-export interface Contributor {
-  id: string
-  username: string
-  email: string
-  totalTasks: number
 }

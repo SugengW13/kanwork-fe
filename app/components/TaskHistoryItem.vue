@@ -3,17 +3,25 @@ import { format } from 'date-fns'
 import type { PropType } from 'vue'
 
 const props = defineProps({
-  task: Object as PropType<Task | null>,
+  task: {
+    type: Object as PropType<Task | null>,
+    default: null,
+  },
 })
 
-const { isOpenModal } = useTask()
+const { isOpenModal, selectedTask } = useTask()
+
+const onClickTask = () => {
+  selectedTask.value = props.task
+  isOpenModal.value.detail = true
+}
 </script>
 
 <template>
   <div
     v-if="props.task"
     class="border border-accented rounded-lg p-4 space-x-3 flex items-center cursor-pointer hover:bg-black/5 transition"
-    @click="isOpenModal.detail = true"
+    @click="onClickTask"
   >
     <div class="grow space-y-3 overflow-hidden">
       <div class="flex items-center space-x-3">
@@ -21,11 +29,7 @@ const { isOpenModal } = useTask()
           {{ props.task.title }}
         </p>
 
-        <u-badge
-          variant="soft"
-          :label="props.task.priority"
-          class="rounded-full"
-        />
+        <task-priority-badge :priority="props.task.priority" />
       </div>
 
       <p class="truncate text-sm text-gray-500">
@@ -35,8 +39,8 @@ const { isOpenModal } = useTask()
       <u-separator />
 
       <div class="flex space-x-4 text-sm font-medium">
-        <p>Asignee: {{ props.task.asignee }}</p>
-        <p>Finished at: {{ format(props.task.finishedAt, 'dd/MM/yyyy HH:mm') }}</p>
+        <p>Started at: {{ props.task.startedAt ? format(props.task.startedAt, 'dd/MM/yyyy HH:mm') : '-' }}</p>
+        <p>Finished at: {{ props.task.finishedAt ? format(props.task.finishedAt, 'dd/MM/yyyy HH:mm') : '-' }}</p>
         <p>Duration: {{ secondsToDuration(props.task.duration) }}</p>
       </div>
     </div>

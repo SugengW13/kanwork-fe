@@ -34,38 +34,22 @@ const $route = useRoute()
         </div>
       </nuxt-link>
 
-      <div class="space-y-3 flex flex-col">
-        <nuxt-link
-          to="/teams"
-          @click="isOpen = false"
+      <nuxt-link
+        to="/tasks"
+        @click="isOpen = false"
+      >
+        <div
+          class="hover:bg-primary/5 rounded-lg px-5 py-3 space-x-2 transition flex items-center"
+          :class="{ 'bg-primary/5': $route.path === '/tasks' }"
         >
-          <div
-            class="hover:bg-primary/5 rounded-lg px-5 py-3 space-x-2 transition flex items-center"
-            :class="{ 'bg-primary/5': $route.path === '/teams' }"
-          >
-            <u-icon
-              name="material-symbols:team-dashboard-outline"
-              size="20"
-            />
+          <u-icon
+            name="material-symbols:file-copy-outline-rounded"
+            size="20"
+          />
 
-            <p class="text-lg font-medium">Teams</p>
-          </div>
-        </nuxt-link>
-
-        <!-- <div class="space-y-3 flex flex-col">
-          <nuxt-link
-            v-for="i in 3"
-            :key="`team-${i}`"
-            to="#"
-            @click="isOpen = false"
-          >
-            <div class="hover:bg-primary/5 rounded-lg px-5 py-3 space-x-2 transition flex items-center">
-              <div class="w-5" />
-              <p class="text-lg font-medium">Team {{ i }}</p>
-            </div>
-          </nuxt-link>
-        </div> -->
-      </div>
+          <p class="text-lg font-medium">Tasks</p>
+        </div>
+      </nuxt-link>
     </div>
   </div>
 </template>

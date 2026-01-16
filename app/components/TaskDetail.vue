@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { format } from 'date-fns'
+const { selectedTask } = useTask()
 </script>
 
 <template>
-  <div class="p-5 space-y-4">
+  <div
+    v-if="selectedTask"
+    class="p-5 space-y-4"
+  >
     <div class="flex items-center justify-between">
       <p class="text-xl font-semibold">
-        Task Title
+        {{ selectedTask.title }}
       </p>
 
-      <!-- TODO: Integrate with status & finished at -->
       <div class="flex space-x-3">
         <u-button
           size="lg"
@@ -29,29 +31,44 @@ import { format } from 'date-fns'
       </div>
     </div>
 
-    <p class="text-sm text-gray-500">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, tempora ad provident eveniet odit quo.
+    <p
+      v-if="selectedTask.description?.length"
+      class="text-sm text-gray-500 text-justify"
+    >
+      {{ selectedTask.description }}
     </p>
 
-    <div class="space-x-2">
-      <u-badge
-        variant="soft"
-        label="Status"
-        class="rounded-full"
+    <u-separator />
+
+    <div class="grid grid-cols-2 gap-4">
+      <label-data label="Status">
+        <task-status-badge :status="selectedTask.status" />
+      </label-data>
+
+      <label-data label="Priority">
+        <task-priority-badge :priority="selectedTask.priority" />
+      </label-data>
+
+      <label-data
+        label="Deadline"
+        :data="formatDate(selectedTask.deadlineAt, 'dd MMMM, yyyy HH:mm')"
+        class="col-span-2"
       />
 
-      <u-badge
-        variant="soft"
-        label="Priority"
-        class="rounded-full"
+      <label-data
+        label="Started At"
+        :data="formatDate(selectedTask.startedAt, 'dd MMMM, yyyy HH:mm')"
       />
-    </div>
 
-    <div class="grid grid-cols-2 gap-4 text-sm">
-      <p>Asginee: John Doe</p>
-      <p>Deadline: {{ format(new Date(), 'dd/MM/yyyy HH:mm') }}</p>
-      <p>Started At: {{ format(new Date(), 'dd/MM/yyyy HH:mm') }}</p>
-      <p>Finished At: {{ format(new Date(), 'dd/MM/yyyy HH:mm') }}</p>
+      <label-data
+        label="Finished At"
+        :data="formatDate(selectedTask.finishedAt, 'dd MMMM, yyyy HH:mm')"
+      />
+
+      <label-data
+        label="Duration"
+        :data="secondsToDuration(selectedTask.duration)"
+      />
     </div>
   </div>
 </template>

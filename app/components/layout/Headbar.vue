@@ -17,19 +17,10 @@ const { isOpen } = useSidebar()
       </p>
     </div>
 
-    <div class="flex items-center space-x-5">
-      <u-button
-        size="lg"
-        variant="ghost"
-        icon="material-symbols:notifications-outline-rounded"
-        class="rounded-full"
-      />
-
-      <u-button
-        size="lg"
-        icon="material-symbols:person-rounded"
-        class="rounded-full"
-      />
-    </div>
+    <u-button
+      size="lg"
+      icon="material-symbols:person-rounded"
+      class="rounded-full"
+    />
   </div>
 </template>

@@ -1,22 +1,17 @@
 <script setup lang="ts">
-const { isOpenModal, teams, selectedTeam, getTeams } = useTeam()
-
-const onClickCreate = () => {
-  selectedTeam.value = null
-  isOpenModal.value.form = true
-}
+const { getTasks } = useTask()
 
 onMounted(async () => {
-  await getTeams()
+  await getTasks()
 })
 </script>
 
 <template>
   <div class="space-y-8 flex flex-col h-full">
-    <page-header title="Teams" />
+    <page-header title="Tasks" />
 
-    <div class="space-y-8 flex flex-col grow min-h-0">
-      <div class="flex justify-between">
+    <div class="space-y-8 flex flex-col min-h-0 grow">
+      <div class="flex items-center justify-between">
         <div class="space-x-5">
           <u-input
             size="lg"
@@ -35,16 +30,15 @@ onMounted(async () => {
           size="lg"
           label="Add New"
           trailing-icon="material-symbols:add-rounded"
-          @click="onClickCreate"
         />
       </div>
 
-      <div class="grid grid-cols-3 gap-8 overflow-y-auto">
-        <team-item
-          v-for="team in teams"
-          :key="`team-${team.id}`"
-          :team="team"
-        />
+      <div class="grid grid-cols-3 gap-8 grow min-h-0 overflow-y-hidden">
+        <task-container type="TODO" />
+
+        <task-container type="DOING" />
+
+        <task-container type="DONE" />
       </div>
     </div>
   </div>
