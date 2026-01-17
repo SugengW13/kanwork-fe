@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
 import { format } from 'date-fns'
 import type { PropType } from 'vue'
 
@@ -9,19 +10,39 @@ const props = defineProps({
   },
 })
 
-const { isOpenModal, selectedTask } = useTask()
+const { isOpenModal, selectedTask, draggedTask } = useTask()
 
-const onClickTask = () => {
+const dropdownItems = ref<DropdownMenuItem[]>([
+  {
+    color: 'neutral',
+    label: 'Update',
+    icon: 'material-symbols:edit-outline-rounded',
+  },
+  {
+    color: 'error',
+    label: 'Delete',
+    icon: 'material-symbols:delete-outline-rounded',
+  },
+])
+
+const onClick = () => {
   selectedTask.value = props.task
   isOpenModal.value.detail = true
+}
+
+const onDragStart = () => {
+  if (!props.task) return
+  draggedTask.value = props.task
 }
 </script>
 
 <template>
   <div
     v-if="props.task"
-    class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer hover:bg-black/5 transition"
-    @click.self="onClickTask"
+    draggable="true"
+    class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer hover:bg-black/5 transition select-none"
+    @click.self="onClick"
+    @dragstart="onDragStart"
   >
     <div class="flex items-center justify-between pointer-events-none">
       <div class="flex items-center space-x-3">
@@ -32,11 +53,16 @@ const onClickTask = () => {
         <task-priority-badge :priority="props.task.priority" />
       </div>
 
-      <u-button
-        variant="ghost"
-        icon="material-symbols:more-vert"
-        class="rounded-full pointer-events-auto"
-      />
+      <u-dropdown-menu
+        size="lg"
+        :items="dropdownItems"
+      >
+        <u-button
+          variant="ghost"
+          icon="material-symbols:more-vert"
+          class="rounded-full pointer-events-auto"
+        />
+      </u-dropdown-menu>
     </div>
 
     <p class="text-sm text-gray-500 pointer-events-none line-clamp-2 text-justify">

@@ -34,11 +34,11 @@ onMounted(async () => {
       </div>
 
       <div class="grid grid-cols-3 gap-8 grow min-h-0 overflow-y-hidden">
-        <task-container type="TODO" />
+        <task-container status="TODO" />
 
-        <task-container type="DOING" />
+        <task-container status="DOING" />
 
-        <task-container type="DONE" />
+        <task-container status="DONE" />
       </div>
     </div>
   </div>

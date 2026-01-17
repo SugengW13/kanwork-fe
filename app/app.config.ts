@@ -8,6 +8,11 @@ export default defineAppConfig({
       slots: {
         overlay: 'bg-black/50! backdrop-blur-xs',
       },
+      variants: {
+        fullscreen: {
+          false: { content: 'max-w-2xl!' },
+        },
+      },
     },
     table: {
       slots: {

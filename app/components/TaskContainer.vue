@@ -2,13 +2,13 @@
 import type { PropType } from 'vue'
 
 const props = defineProps({
-  type: {
+  status: {
     type: String as PropType<'TODO' | 'DOING' | 'DONE'>,
     required: true,
   },
 })
 
-const { tasks } = useTask()
+const { draggedTask, tasks } = useTask()
 
 const title: Record<'TODO' | 'DOING' | 'DONE', string> = {
   TODO: 'To Do',
@@ -22,38 +22,36 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
   DONE: 'bg-success/15 text-success',
 }
 
-const totalTasks = computed(() => {
-  switch (props.type) {
-    case 'TODO': return tasks.value.todo.length
-    case 'DOING': return tasks.value.doing.length
-    case 'DONE': return tasks.value.done.length
-    default: return 0
-  }
-})
+const onDragOver = (event: DragEvent) => {
+  event.preventDefault()
+}
 
-const taskData = computed(() => {
-  switch (props.type) {
-    case 'TODO': return tasks.value.todo
-    case 'DOING': return tasks.value.doing
-    case 'DONE': return tasks.value.done
-    default: return []
-  }
-})
+const onDrop = () => {
+  if (!draggedTask.value) return
+  if (props.status === draggedTask.value.status) return
+
+  tasks.value[props.status].add(draggedTask.value)
+
+  const oldStatus = draggedTask.value.status
+  draggedTask.value.status = props.status
+
+  tasks.value[oldStatus].delete(draggedTask.value)
+}
 </script>
 
 <template>
   <div class="border bg-white rounded-lg border-accented flex flex-col min-h-0">
     <div class="p-5 flex items-center justify-between">
       <p class="text-xl font-semibold">
-        {{ title[props.type] }}
+        {{ title[props.status] }}
       </p>
 
       <div
         class="aspect-square w-8 rounded-full flex items-center justify-center"
-        :class="color[props.type]"
+        :class="color[props.status]"
       >
         <p class="text-sm font-medium">
-          {{ totalTasks }}
+          {{ tasks[props.status].size }}
         </p>
       </div>
     </div>
@@ -62,15 +60,19 @@ const taskData = computed(() => {
 
     <div class="grow min-h-0 p-5 space-y-4 flex flex-col">
       <u-button
-        v-if="props.type === 'TODO'"
+        v-if="props.status === 'TODO'"
         block
         size="lg"
         label="Order Tasks"
       />
 
-      <div class="grow overflow-y-auto space-y-4">
+      <div
+        class="grow overflow-y-auto space-y-4"
+        @dragover="onDragOver"
+        @drop.prevent="onDrop"
+      >
         <task-item
-          v-for="task in taskData"
+          v-for="task in tasks[props.status]"
           :key="`task-${task.status}-${task.id}`"
           :task="task"
         />

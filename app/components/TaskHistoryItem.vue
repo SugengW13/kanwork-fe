@@ -38,10 +38,21 @@ const onClickTask = () => {
 
       <u-separator />
 
-      <div class="flex space-x-4 text-sm font-medium">
-        <p>Started at: {{ props.task.startedAt ? format(props.task.startedAt, 'dd/MM/yyyy HH:mm') : '-' }}</p>
-        <p>Finished at: {{ props.task.finishedAt ? format(props.task.finishedAt, 'dd/MM/yyyy HH:mm') : '-' }}</p>
-        <p>Duration: {{ secondsToDuration(props.task.duration) }}</p>
+      <div class="flex space-x-3 text-sm font-medium">
+        <p>
+          Started at:
+          {{ props.task.startedAt ? format(props.task.startedAt, 'dd/MM/yyyy HH:mm') : '-' }}
+        </p>
+
+        <p>
+          Finished at:
+          {{ props.task.finishedAt ? format(props.task.finishedAt, 'dd/MM/yyyy HH:mm') : '-' }}
+        </p>
+
+        <p>
+          Duration:
+          {{ secondsToDuration(props.task.duration) }}
+        </p>
       </div>
     </div>
 

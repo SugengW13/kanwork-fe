@@ -40,7 +40,7 @@ const { selectedTask } = useTask()
 
     <u-separator />
 
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-3 gap-4">
       <label-data label="Status">
         <task-status-badge :status="selectedTask.status" />
       </label-data>
@@ -52,7 +52,6 @@ const { selectedTask } = useTask()
       <label-data
         label="Deadline"
         :data="formatDate(selectedTask.deadlineAt, 'dd MMMM, yyyy HH:mm')"
-        class="col-span-2"
       />
 
       <label-data

@@ -3,10 +3,7 @@ const { isOpenModal } = useTask()
 </script>
 
 <template>
-  <u-modal
-    v-model:open="isOpenModal.detail"
-    :ui="{ content: 'w-xl' }"
-  >
+  <u-modal v-model:open="isOpenModal.detail">
     <template #content>
       <task-detail />
     </template>

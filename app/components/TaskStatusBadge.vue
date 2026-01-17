@@ -14,8 +14,8 @@ const label: Record<TaskStatusType, string> = {
   DONE: 'Done',
 }
 
-const color: Record<TaskStatusType, 'error' | 'info' | 'success'> = {
-  TODO: 'error',
+const color: Record<TaskStatusType, 'warning' | 'info' | 'success'> = {
+  TODO: 'warning',
   DOING: 'info',
   DONE: 'success',
 }
