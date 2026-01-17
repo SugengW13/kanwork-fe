@@ -4,22 +4,21 @@ export const useTask = () => {
     form: false,
   }))
 
-  const tasks = useState <Record<TaskStatusType, Set<Task>>>('tasks:task', () => ({
-    TODO: new Set(),
-    DOING: new Set(),
-    DONE: new Set(),
+  const tasks = useState <Record<TaskStatusType, Task[]>>('tasks:task', () => ({
+    TODO: [],
+    DOING: [],
+    DONE: [],
   }))
 
   const selectedTask = useState<null | Task>('task:selected-task', () => null)
-  const draggedTask = useState<null | Task>('task:dragged-task-id', () => null)
 
   const getTasks = () => {
-    tasks.value.TODO = new Set()
-    tasks.value.DOING = new Set()
-    tasks.value.DONE = new Set()
+    tasks.value.TODO = []
+    tasks.value.DOING = []
+    tasks.value.DONE = []
 
     for (let i = 0; i < 10; i++) {
-      tasks.value.TODO.add({
+      tasks.value.TODO.push({
         id: `task-todo-${i + 1}`,
         title: `Task To Do ${i + 1}`,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie venenatis lacinia. Pellentesque et dolor.',
@@ -31,7 +30,7 @@ export const useTask = () => {
         duration: 60 * 60 * (i + 1),
       })
 
-      tasks.value.DOING.add({
+      tasks.value.DOING.push({
         id: `task-doing-${i + 1}`,
         title: `Task Doing ${i + 1}`,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie venenatis lacinia. Pellentesque et dolor.',
@@ -43,7 +42,7 @@ export const useTask = () => {
         duration: 60 * 60 * (i + 1),
       })
 
-      tasks.value.DONE.add({
+      tasks.value.DONE.push({
         id: `task-done-${i + 1}`,
         title: `Task Done ${i + 1}`,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie venenatis lacinia. Pellentesque et dolor.',
@@ -61,7 +60,6 @@ export const useTask = () => {
     isOpenModal,
     tasks,
     selectedTask,
-    draggedTask,
     getTasks,
   }
 }

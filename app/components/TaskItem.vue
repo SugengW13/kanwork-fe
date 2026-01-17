@@ -10,7 +10,9 @@ const props = defineProps({
   },
 })
 
-const { isOpenModal, selectedTask, draggedTask } = useTask()
+const emit = defineEmits(['on-drag'])
+
+const { isOpenModal, selectedTask } = useTask()
 
 const dropdownItems = ref<DropdownMenuItem[]>([
   {
@@ -29,11 +31,6 @@ const onClick = () => {
   selectedTask.value = props.task
   isOpenModal.value.detail = true
 }
-
-const onDragStart = () => {
-  if (!props.task) return
-  draggedTask.value = props.task
-}
 </script>
 
 <template>
@@ -42,7 +39,7 @@ const onDragStart = () => {
     draggable="true"
     class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer hover:bg-black/5 transition select-none"
     @click.self="onClick"
-    @dragstart="onDragStart"
+    @dragstart="emit('on-drag')"
   >
     <div class="flex items-center justify-between pointer-events-none">
       <div class="flex items-center space-x-3">

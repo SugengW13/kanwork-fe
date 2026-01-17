@@ -8,7 +8,8 @@ const props = defineProps({
   },
 })
 
-const { draggedTask, tasks } = useTask()
+const { tasks } = useTask()
+const { onDrag, onDrop } = useKanban()
 
 const title: Record<'TODO' | 'DOING' | 'DONE', string> = {
   TODO: 'To Do',
@@ -25,18 +26,6 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
 const onDragOver = (event: DragEvent) => {
   event.preventDefault()
 }
-
-const onDrop = () => {
-  if (!draggedTask.value) return
-  if (props.status === draggedTask.value.status) return
-
-  tasks.value[props.status].add(draggedTask.value)
-
-  const oldStatus = draggedTask.value.status
-  draggedTask.value.status = props.status
-
-  tasks.value[oldStatus].delete(draggedTask.value)
-}
 </script>
 
 <template>
@@ -51,7 +40,7 @@ const onDrop = () => {
         :class="color[props.status]"
       >
         <p class="text-sm font-medium">
-          {{ tasks[props.status].size }}
+          {{ tasks[props.status].length }}
         </p>
       </div>
     </div>
@@ -69,12 +58,13 @@ const onDrop = () => {
       <div
         class="grow overflow-y-auto space-y-4"
         @dragover="onDragOver"
-        @drop.prevent="onDrop"
+        @drop.prevent="onDrop(props.status)"
       >
         <task-item
-          v-for="task in tasks[props.status]"
+          v-for="(task, i) in tasks[props.status]"
           :key="`task-${task.status}-${task.id}`"
           :task="task"
+          @on-drag="onDrag(task, i)"
         />
       </div>
     </div>
