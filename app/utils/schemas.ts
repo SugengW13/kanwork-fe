@@ -1,4 +1,4 @@
-import { object, ref, string } from 'yup'
+import { date, object, ref, string } from 'yup'
 
 export const loginSchema = object({
   email: string()
@@ -24,4 +24,33 @@ export const registerSchema = object({
     .required('Required')
     .min(8, 'Min. 8 characters')
     .oneOf([ref('password')], 'Password must match'),
+})
+
+export const taskSchema = object({
+  title: string()
+    .required('Required')
+    .max(20, 'Max. 20 characters'),
+  description: string()
+    .notRequired()
+    .max(200, 'Max. 200 characters'),
+  status: string()
+    .required('Required')
+    .oneOf(['TODO', 'DOING', 'DONE'], 'Invalid status'),
+  priority: string()
+    .required('Required')
+    .oneOf(['LOW', 'MEDIUM', 'HIGH'], 'Invalid priority'),
+  deadlineAt: date()
+    .required('Required'),
+  startedAt: date()
+    .when('status', {
+      is: (value: TaskStatusType) => (value === 'DOING' || value === 'DONE'),
+      then: schema => schema.required('Required'),
+      otherwise: schema => schema.notRequired(),
+    }),
+  finishedAt: date()
+    .when('status', {
+      is: (value: TaskStatusType) => value === 'DONE',
+      then: schema => schema.required('Required'),
+      otherwise: schema => schema.notRequired(),
+    }),
 })

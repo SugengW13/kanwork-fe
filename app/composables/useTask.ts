@@ -25,8 +25,6 @@ export const useTask = () => {
         status: 'TODO',
         priority: 'LOW',
         deadlineAt: new Date(),
-        startedAt: null,
-        finishedAt: null,
         duration: 60 * 60 * (i + 1),
       })
 
@@ -38,7 +36,6 @@ export const useTask = () => {
         priority: 'MEDIUM',
         deadlineAt: new Date(),
         startedAt: new Date(),
-        finishedAt: null,
         duration: 60 * 60 * (i + 1),
       })
 
@@ -56,10 +53,25 @@ export const useTask = () => {
     }
   }
 
+  const createTask = (form: TaskForm) => {
+    console.log('Create', form)
+  }
+
+  const updateTask = (id: string, form: TaskForm) => {
+    console.log('Update', id, form)
+  }
+
+  const deleteTask = (id: string) => {
+    console.log('Delete', id)
+  }
+
   return {
     isOpenModal,
     tasks,
     selectedTask,
     getTasks,
+    createTask,
+    updateTask,
+    deleteTask,
   }
 }

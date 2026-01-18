@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const { getTasks } = useTask()
+const { isOpenModal, selectedTask, getTasks } = useTask()
+
+const onClickAdd = () => {
+  selectedTask.value = null
+  isOpenModal.value.form = true
+}
 
 onMounted(async () => {
   await getTasks()
@@ -30,6 +35,7 @@ onMounted(async () => {
           size="lg"
           label="Add New"
           trailing-icon="material-symbols:add-rounded"
+          @click="onClickAdd"
         />
       </div>
 
