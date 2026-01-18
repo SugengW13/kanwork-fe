@@ -1,20 +1,31 @@
 export const useAuth = () => {
-  const login = (form: LoginForm) => {
-    // Login
+  const isOpenModal = useState('auth:is-open-modal', () => ({
+    logout: false,
+  }))
 
-    console.log(form)
+  const login = (form: LoginForm) => {
+    console.log('Login', form)
+    navigateTo('/dashboard')
     toast.success('Login Successful')
   }
 
   const register = (form: RegisterForm) => {
-    // Register
-
-    console.log(form)
+    console.log('Register', form)
     toast.success('Register Successful')
   }
 
+  const logout = () => {
+    isOpenModal.value.logout = false
+
+    console.log('Logout')
+    navigateTo('/login')
+    toast.success('Logout Successful')
+  }
+
   return {
+    isOpenModal,
     login,
     register,
+    logout,
   }
 }

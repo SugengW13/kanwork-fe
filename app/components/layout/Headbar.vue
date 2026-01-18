@@ -1,5 +1,21 @@
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
+const { isOpenModal } = useAuth()
 const { isOpen } = useSidebar()
+
+const items = ref<DropdownMenuItem[]>([
+  {
+    label: 'Settings',
+    icon: 'material-symbols:settings-outline-rounded',
+  },
+  {
+    label: 'Logout',
+    icon: 'material-symbols:logout-rounded',
+    color: 'error',
+    onSelect: () => { isOpenModal.value.logout = true },
+  },
+])
 </script>
 
 <template>
@@ -18,10 +34,12 @@ const { isOpen } = useSidebar()
       </p>
     </div>
 
-    <u-button
-      size="lg"
-      icon="material-symbols:person-rounded"
-      class="rounded-full"
-    />
+    <u-dropdown-menu :items="items">
+      <u-button
+        size="lg"
+        icon="material-symbols:person-rounded"
+        class="rounded-full"
+      />
+    </u-dropdown-menu>
   </div>
 </template>

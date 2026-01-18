@@ -13,8 +13,6 @@ onMounted(async () => {
 
 <template>
   <div class="space-y-8 flex flex-col h-full">
-    <page-header title="Tasks" />
-
     <div class="space-y-8 flex flex-col min-h-0 grow">
       <div class="flex items-center justify-between">
         <div class="space-x-5">

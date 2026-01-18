@@ -3,7 +3,7 @@ import { date, object, ref, string } from 'yup'
 export const loginSchema = object({
   email: string()
     .required('Required')
-    .max(20, 'Max. 20 characters'),
+    .max(50, 'Max. 20 characters'),
   password: string()
     .required('Required')
     .min(8, 'Min. 8 characters'),
