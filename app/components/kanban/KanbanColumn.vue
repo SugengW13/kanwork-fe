@@ -1,37 +1,17 @@
-<script
-  setup
-  lang="ts"
-  generic="T extends Record<string, unknown>, S extends any[]"
->
-import { DnDOperations, useDraggable, useDroppable } from '@vue-dnd-kit/core'
-import { computed } from 'vue'
-import DragHandle from './DragHandle.vue'
+<script setup lang="ts" generic="T extends Record<string, unknown>, S extends any[]">
+import { DnDOperations, useDroppable } from '@vue-dnd-kit/core'
 
 const {
-  groups = ['kanban-columns'],
-  columns,
-  columnIndex,
   bodyGroups = ['kanban-column-body'],
   bodySource,
   column,
 } = defineProps<{
-  groups?: string[]
-  columns: T[]
-  columnIndex: number
   bodyGroups?: string[]
   bodySource: S
   column: T
 }>()
 
-const { elementRef, handleDragStart, isDragging, isOvered } = useDraggable({
-  groups,
-  data: computed(() => ({
-    source: columns,
-    index: columnIndex,
-  })),
-})
-
-const { elementRef: droppableRef, isOvered: isBodyOvered } = useDroppable({
+const { elementRef, isOvered } = useDroppable({
   groups: bodyGroups,
   data: computed(() => ({
     source: bodySource,
@@ -45,31 +25,40 @@ const { elementRef: droppableRef, isOvered: isBodyOvered } = useDroppable({
 <template>
   <li
     ref="elementRef"
-    class="vue-dnd-kanban-column"
-    :class="{
-      'vue-dnd-kanban-column-dragging': isDragging,
-      'vue-dnd-kanban-column-overed': isOvered,
-    }"
+    class="border bg-white rounded-lg border-accented flex flex-col min-h-0 transition-transform"
+    :class="{ '-translate-y-1 shadow-lg': isOvered }"
   >
-    <header class="vue-dnd-kanban-column-header">
-      <DragHandle @pointerdown="handleDragStart" />
-      <slot name="header">
-        <h3 class="vue-dnd-kanban-column-title">
-          {{ column.title }}
-        </h3>
-      </slot>
-    </header>
+    <div class="p-5 flex items-center justify-between">
+      <p class="text-xl font-semibold">
+        {{ column.title }}
+      </p>
 
-    <ul
-      ref="droppableRef"
-      class="vue-dnd-kanban-column-body"
-      :class="{ 'vue-dnd-kanban-column-body-overed': isBodyOvered }"
-    >
-      <slot :body-source="bodySource" />
-    </ul>
+      <!-- <div
+        class="aspect-square w-8 rounded-full flex items-center justify-center"
+        :class="color[props.status]"
+      >
+        <p class="text-sm font-medium">
+          {{ tasks.length }}
+        </p>
+      </div> -->
+    </div>
 
-    <footer class="vue-dnd-kanban-column-footer">
-      <slot name="footer" />
-    </footer>
+    <u-separator />
+
+    <div class="grow min-h-0 p-5 space-y-4 flex flex-col">
+      <!-- <u-button
+        v-if="props.status === 'TODO'"
+        block
+        size="lg"
+        label="Order Tasks"
+      /> -->
+
+      <div
+        ref="droppableRef"
+        class="grow overflow-y-auto space-y-4"
+      >
+        <slot name="default" />
+      </div>
+    </div>
   </li>
 </template>

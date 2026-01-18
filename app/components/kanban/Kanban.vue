@@ -1,32 +1,11 @@
 <script setup lang="ts" generic="T extends Record<string, unknown>">
-import { DnDOperations, useDroppable } from '@vue-dnd-kit/core'
-import { computed } from 'vue'
-
-const { columns, groups = ['kanban-columns'] } = defineProps<{
+const { columns } = defineProps<{
   columns: T[]
-  groups?: string[]
 }>()
-
-const { elementRef } = useDroppable({
-  groups,
-  data: computed(() => ({
-    source: columns,
-  })),
-  events: {
-    onDrop: (store) => {
-      if (store.hovered.element.value) DnDOperations.applyTransfer(store)
-    },
-  },
-})
 </script>
 
 <template>
-  <ul
-    ref="elementRef"
-    class="vue-dnd-kanban"
-  >
+  <ul class="grow grid grid-cols-3 gap-5">
     <slot :columns="columns" />
   </ul>
 </template>
-
-<style src="./styles.css" />

@@ -12,7 +12,7 @@ interface IColumn {
   tasks: ITask[]
 }
 
-const columns = ref<IColumn[]>([
+const columnItems = ref<IColumn[]>([
   {
     id: 1,
     title: 'To Do',
@@ -41,11 +41,11 @@ const columns = ref<IColumn[]>([
 </script>
 
 <template>
-  <Kanban
+  <kanban
     v-slot="{ columns }"
-    :columns="columns"
+    :columns="columnItems"
   >
-    <KanbanColumn
+    <kanban-column
       v-for="(column, index) in columns"
       :key="column.id"
       :column="column"
@@ -53,11 +53,7 @@ const columns = ref<IColumn[]>([
       :column-index="index"
       :body-source="column.tasks"
     >
-      <template #header>
-        {{ column.title }}
-      </template>
-
-      <KanbanItem
+      <kanban-item
         v-for="(task, taskIndex) in column.tasks"
         :key="task.id"
         :item="task"
@@ -65,7 +61,7 @@ const columns = ref<IColumn[]>([
         :item-index="taskIndex"
       >
         {{ task.title }}
-      </KanbanItem>
-    </KanbanColumn>
-  </Kanban>
+      </kanban-item>
+    </kanban-column>
+  </kanban>
 </template>

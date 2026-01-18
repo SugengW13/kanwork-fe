@@ -35,7 +35,6 @@ const onClick = () => {
   <div
     v-if="props.task"
     ref="elementRef"
-    :aria-pressed="isDragging"
     class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer bg-white hover:bg-black/5 transition select-none"
     :class="{ 'bg-black/5!': isDragging }"
     @click="onClick"
