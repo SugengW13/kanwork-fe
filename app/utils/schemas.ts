@@ -42,15 +42,17 @@ export const taskSchema = object({
   deadlineAt: date()
     .required('Required'),
   startedAt: date()
+    .max(ref('finishedAt'), 'Must be before finish date')
     .when('status', {
       is: (value: TaskStatusType) => (value === 'DOING' || value === 'DONE'),
       then: schema => schema.required('Required'),
-      otherwise: schema => schema.notRequired(),
+      otherwise: schema => schema.oneOf([undefined], 'Must be empty'),
     }),
   finishedAt: date()
+    .min(ref('startedAt'), 'Must be after start date')
     .when('status', {
       is: (value: TaskStatusType) => value === 'DONE',
       then: schema => schema.required('Required'),
-      otherwise: schema => schema.notRequired(),
+      otherwise: schema => schema.oneOf([undefined], 'Must be empty'),
     }),
 })

@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const { selectedTask } = useTask()
+const { isOpenModal, selectedTask } = useTask()
+
+const onClickUpdate = () => {
+  isOpenModal.value.detail = false
+  isOpenModal.value.form = true
+}
 </script>
 
 <template>
@@ -19,6 +24,7 @@ const { selectedTask } = useTask()
           variant="outline"
           label="Update"
           leading-icon="material-symbols:edit-outline-rounded"
+          @click="onClickUpdate"
         />
 
         <u-button
