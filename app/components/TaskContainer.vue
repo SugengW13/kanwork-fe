@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useDroppable } from '@vue-dnd-kit/core'
 import type { PropType } from 'vue'
 
 const props = defineProps({
@@ -9,7 +10,14 @@ const props = defineProps({
 })
 
 const { tasks } = useTask()
-const { onDrag, onDrop } = useKanban()
+
+const { elementRef, isOvered } = useDroppable({
+  events: {
+    onDrop: () => {
+      console.log('Drop')
+    },
+  },
+})
 
 const title: Record<'TODO' | 'DOING' | 'DONE', string> = {
   TODO: 'To Do',
@@ -21,10 +29,6 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
   TODO: 'bg-warning/15 text-warning',
   DOING: 'bg-info/15 text-info',
   DONE: 'bg-success/15 text-success',
-}
-
-const onDragOver = (event: DragEvent) => {
-  event.preventDefault()
 }
 </script>
 
@@ -54,17 +58,17 @@ const onDragOver = (event: DragEvent) => {
         size="lg"
         label="Order Tasks"
       />
-
       <div
+        ref="elementRef"
+        role="region"
+        aria-dropeffect="move"
         class="grow overflow-y-auto space-y-4"
-        @dragover="onDragOver"
-        @drop.prevent="onDrop(props.status)"
+        :class="{ 'bg-gray-100': isOvered }"
       >
         <task-item
-          v-for="(task, i) in tasks[props.status]"
+          v-for="(task) in tasks[props.status]"
           :key="`task-${task.status}-${task.id}`"
           :task="task"
-          @on-drag="onDrag(task, i)"
         />
       </div>
     </div>
