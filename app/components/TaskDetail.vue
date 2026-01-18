@@ -5,6 +5,11 @@ const onClickUpdate = () => {
   isOpenModal.value.detail = false
   isOpenModal.value.form = true
 }
+
+const onClickDelete = () => {
+  isOpenModal.value.detail = false
+  isOpenModal.value.delete = true
+}
 </script>
 
 <template>
@@ -33,6 +38,7 @@ const onClickUpdate = () => {
           variant="outline"
           label="Delete"
           leading-icon="material-symbols:delete-outline-rounded"
+          @click="onClickDelete"
         />
       </div>
     </div>

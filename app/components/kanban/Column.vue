@@ -13,8 +13,10 @@ const props = defineProps({
   },
 })
 
+const { isOpenModal } = useTask()
+
 const { elementRef, isOvered } = useDroppable({
-  groups: ['task'],
+  groups: ['kanban'],
   data: computed(() => ({
     source: props.tasks,
   })),
@@ -40,13 +42,26 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
   <li
     v-if="props.tasks"
     ref="elementRef"
-    class="border bg-white rounded-lg border-accented flex flex-col min-h-0 transition-transform"
+    class="border bg-white rounded-lg border-accented flex flex-col min-h-0 transition-all"
     :class="{ '-translate-y-1 shadow-lg': isOvered }"
   >
     <div class="p-5 flex items-center justify-between">
-      <p class="text-xl font-semibold">
-        {{ title[props.status] }}
-      </p>
+      <div class="flex space-x-3">
+        <u-tooltip
+          text="Auto Sort"
+          :delay-duration="100"
+        >
+          <u-button
+            v-if="props.status === 'TODO'"
+            icon="material-symbols:sort-rounded"
+            @click="isOpenModal.autoSort = true"
+          />
+        </u-tooltip>
+
+        <p class="text-xl font-semibold">
+          {{ title[props.status] }}
+        </p>
+      </div>
 
       <div
         class="aspect-square w-8 rounded-full flex items-center justify-center"
@@ -61,13 +76,6 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
     <u-separator />
 
     <div class="grow min-h-0 p-5 space-y-4 flex flex-col">
-      <u-button
-        v-if="props.status === 'TODO'"
-        block
-        size="lg"
-        label="Order Tasks"
-      />
-
       <div
         ref="droppableRef"
         class="grow overflow-y-auto space-y-4"

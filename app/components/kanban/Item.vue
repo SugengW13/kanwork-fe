@@ -17,7 +17,7 @@ const props = defineProps({
 const { isOpenModal, selectedTask } = useTask()
 
 const { elementRef, handleDragStart, isDragging } = useDraggable({
-  groups: ['task'],
+  groups: ['kanban'],
   data: computed(() => ({
     source: props.tasks,
     index: props.index,

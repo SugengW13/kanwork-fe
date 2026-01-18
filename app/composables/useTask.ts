@@ -2,6 +2,8 @@ export const useTask = () => {
   const isOpenModal = useState('task:is-open-modal', () => ({
     detail: false,
     form: false,
+    delete: false,
+    autoSort: false,
   }))
 
   const tasks = useState <Record<TaskStatusType, Task[]>>('tasks:task', () => ({
@@ -65,6 +67,10 @@ export const useTask = () => {
     console.log('Delete', id)
   }
 
+  const autoSortTask = () => {
+    console.log('Auto Sort')
+  }
+
   return {
     isOpenModal,
     tasks,
@@ -73,5 +79,6 @@ export const useTask = () => {
     createTask,
     updateTask,
     deleteTask,
+    autoSortTask,
   }
 }
