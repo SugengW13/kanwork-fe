@@ -1,67 +1,39 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+const { getTasks } = useTask()
 
-interface ITask {
-  id: number
-  title: string
-}
-
-interface IColumn {
-  id: number
-  title: string
-  tasks: ITask[]
-}
-
-const columnItems = ref<IColumn[]>([
-  {
-    id: 1,
-    title: 'To Do',
-    tasks: [
-      { id: 1, title: 'Research competitors' },
-      { id: 2, title: 'Define project scope' },
-    ],
-  },
-  {
-    id: 2,
-    title: 'In Progress',
-    tasks: [
-      { id: 3, title: 'Create wireframes' },
-      { id: 4, title: 'Design UI components' },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Done',
-    tasks: [
-      { id: 5, title: 'Project kickoff meeting' },
-      { id: 6, title: 'Gather requirements' },
-    ],
-  },
-])
+onMounted(async () => {
+  await getTasks()
+})
 </script>
 
 <template>
-  <kanban
-    v-slot="{ columns }"
-    :columns="columnItems"
-  >
-    <kanban-column
-      v-for="(column, index) in columns"
-      :key="column.id"
-      :column="column"
-      :columns="columns"
-      :column-index="index"
-      :body-source="column.tasks"
-    >
-      <kanban-item
-        v-for="(task, taskIndex) in column.tasks"
-        :key="task.id"
-        :item="task"
-        :items="column.tasks"
-        :item-index="taskIndex"
-      >
-        {{ task.title }}
-      </kanban-item>
-    </kanban-column>
-  </kanban>
+  <div class="space-y-8 flex flex-col h-full">
+    <page-header title="Tasks" />
+
+    <div class="space-y-8 flex flex-col min-h-0 grow">
+      <div class="flex items-center justify-between">
+        <div class="space-x-5">
+          <u-input
+            size="lg"
+            placeholder="Search"
+            leading-icon="material-symbols:search-rounded"
+          />
+
+          <u-button
+            size="lg"
+            label="Filter"
+            trailing-icon="material-symbols:filter-list-rounded"
+          />
+        </div>
+
+        <u-button
+          size="lg"
+          label="Add New"
+          trailing-icon="material-symbols:add-rounded"
+        />
+      </div>
+
+      <kanban />
+    </div>
+  </div>
 </template>

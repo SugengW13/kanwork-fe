@@ -4,6 +4,11 @@ export default defineAppConfig({
       primary: 'red',
       neutral: 'gray',
     },
+    button: {
+      slots: {
+        base: 'cursor-pointer',
+      },
+    },
     modal: {
       slots: {
         overlay: 'bg-black/50! backdrop-blur-xs',
