@@ -54,11 +54,10 @@ const onClick = () => {
 
     <div class="flex items-center justify-between pointer-events-none">
       <p class="text-sm font-medium">
-        Deadline: {{ formatDate(props.task.deadlineAt, 'dd/MM/yyyy HH:mm') }}
+        Deadline At: {{ formatDate(props.task.deadlineAt, 'dd/MM/yyyy HH:mm') }}
       </p>
 
       <u-button
-        size="sm"
         color="neutral"
         variant="link"
         label="Detail"

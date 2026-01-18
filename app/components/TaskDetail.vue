@@ -62,18 +62,18 @@ const onClickDelete = () => {
       </label-data>
 
       <label-data
-        label="Deadline"
-        :data="formatDate(selectedTask.deadlineAt, 'dd MMMM, yyyy HH:mm')"
+        label="Deadline At"
+        :data="formatDate(selectedTask.deadlineAt, 'dd MMMM yyyy, HH:mm')"
       />
 
       <label-data
         label="Started At"
-        :data="formatDate(selectedTask.startedAt, 'dd MMMM, yyyy HH:mm')"
+        :data="formatDate(selectedTask.startedAt, 'dd MMMM yyyy, HH:mm')"
       />
 
       <label-data
         label="Finished At"
-        :data="formatDate(selectedTask.finishedAt, 'dd MMMM, yyyy HH:mm')"
+        :data="formatDate(selectedTask.finishedAt, 'dd MMMM yyyy, HH:mm')"
       />
 
       <label-data

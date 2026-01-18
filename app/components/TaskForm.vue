@@ -64,8 +64,8 @@ onMounted(() => {
   <u-form
     :state="form"
     :schema="taskSchema"
+    :validate-on="['blur']"
     class="space-y-4"
-    @error="(e) => console.log(e)"
     @submit.prevent="onSubmit"
   >
     <u-form-field
