@@ -7,6 +7,7 @@ const { isOpen } = useSidebar()
     <div class="flex items-center space-x-5">
       <u-button
         size="lg"
+        color="neutral"
         variant="ghost"
         icon="material-symbols:density-medium-rounded"
         @click="isOpen = !isOpen"

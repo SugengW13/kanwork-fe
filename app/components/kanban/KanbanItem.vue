@@ -34,8 +34,8 @@ const onClick = () => {
   <div
     v-if="props.task"
     ref="elementRef"
-    class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer bg-white hover:bg-primary/5 transition select-none"
-    :class="{ 'bg-primary/5!': isDragging }"
+    class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer bg-white hover:bg-black/5 transition select-none"
+    :class="{ 'bg-black/5!': isDragging }"
     @pointerdown.self="handleDragStart"
   >
     <div class="flex items-center justify-between pointer-events-none">
@@ -59,6 +59,7 @@ const onClick = () => {
 
       <u-button
         size="sm"
+        color="neutral"
         variant="link"
         label="Detail"
         trailing-icon="material-symbols:chevron-right-rounded"

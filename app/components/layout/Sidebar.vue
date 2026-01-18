@@ -22,8 +22,8 @@ const $route = useRoute()
         @click="isOpen = false"
       >
         <div
-          class="hover:bg-primary/5 rounded-lg px-5 py-3 space-x-2 transition flex items-center"
-          :class="{ 'bg-primary/5': $route.path === '/dashboard' }"
+          class="hover:bg-primary/5 hover:text-primary rounded-lg px-5 py-3 space-x-2 transition flex items-center"
+          :class="{ 'bg-primary/5 text-primary': $route.path === '/dashboard' }"
         >
           <u-icon
             name="material-symbols:bar-chart-rounded"
@@ -39,8 +39,8 @@ const $route = useRoute()
         @click="isOpen = false"
       >
         <div
-          class="hover:bg-primary/5 rounded-lg px-5 py-3 space-x-2 transition flex items-center"
-          :class="{ 'bg-primary/5': $route.path === '/kanban' }"
+          class="hover:bg-primary/5 hover:text-primary rounded-lg px-5 py-3 space-x-2 transition flex items-center"
+          :class="{ 'bg-primary/5 text-primary': $route.path === '/kanban' }"
         >
           <u-icon
             name="material-symbols:file-copy-outline-rounded"

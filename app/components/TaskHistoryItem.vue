@@ -20,7 +20,7 @@ const onClickTask = () => {
 <template>
   <div
     v-if="props.task"
-    class="border border-accented rounded-lg p-4 space-x-3 flex items-center cursor-pointer hover:bg-primary/5 transition"
+    class="border border-accented rounded-lg p-4 space-x-3 flex items-center cursor-pointer hover:bg-black/5 transition"
     @click="onClickTask"
   >
     <div class="grow space-y-3 overflow-hidden">

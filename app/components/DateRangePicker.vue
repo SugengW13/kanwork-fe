@@ -64,7 +64,7 @@ onMounted(() => {
       color="neutral"
       variant="subtle"
       icon="material-symbols:calendar-today-outline-rounded"
-      class="bg-white hover:bg-gray-100 active:bg-gray-100"
+      class="bg-white hover:bg-black/5!"
     >
       <template v-if="date.start">
         <template v-if="date.end">
