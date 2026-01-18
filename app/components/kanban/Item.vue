@@ -63,7 +63,7 @@ const onClick = () => {
         variant="link"
         label="Detail"
         trailing-icon="material-symbols:chevron-right-rounded"
-        class="pointer-events-auto"
+        class="pointer-events-auto p-0"
         @click="onClick"
       />
     </div>

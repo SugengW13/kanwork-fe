@@ -33,7 +33,7 @@ onMounted(async () => {
         />
       </div>
 
-      <kanban />
+      <kanban-board />
     </div>
   </div>
 </template>
