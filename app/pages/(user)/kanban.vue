@@ -24,11 +24,7 @@ onMounted(async () => {
             leading-icon="material-symbols:search-rounded"
           />
 
-          <u-button
-            size="lg"
-            label="Filter"
-            trailing-icon="material-symbols:filter-list-rounded"
-          />
+          <task-filter />
         </div>
 
         <u-button
