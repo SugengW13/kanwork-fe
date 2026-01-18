@@ -35,19 +35,19 @@ const $route = useRoute()
       </nuxt-link>
 
       <nuxt-link
-        to="/tasks"
+        to="/kanban"
         @click="isOpen = false"
       >
         <div
           class="hover:bg-primary/5 rounded-lg px-5 py-3 space-x-2 transition flex items-center"
-          :class="{ 'bg-primary/5': $route.path === '/tasks' }"
+          :class="{ 'bg-primary/5': $route.path === '/kanban' }"
         >
           <u-icon
             name="material-symbols:file-copy-outline-rounded"
             size="20"
           />
 
-          <p class="text-lg font-medium">Tasks</p>
+          <p class="text-lg font-medium">Kanban</p>
         </div>
       </nuxt-link>
     </div>

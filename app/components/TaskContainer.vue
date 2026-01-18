@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDroppable } from '@vue-dnd-kit/core'
+import { DnDOperations, useDroppable } from '@vue-dnd-kit/core'
 import type { PropType } from 'vue'
 
 const props = defineProps({
@@ -7,15 +7,19 @@ const props = defineProps({
     type: String as PropType<'TODO' | 'DOING' | 'DONE'>,
     required: true,
   },
+  tasks: {
+    type: Array as PropType<Task[]>,
+    default: () => [],
+  },
 })
 
-const { tasks } = useTask()
-
 const { elementRef, isOvered } = useDroppable({
+  groups: ['task'],
+  data: computed(() => ({
+    source: props.tasks,
+  })),
   events: {
-    onDrop: () => {
-      console.log('Drop')
-    },
+    onDrop: DnDOperations.applyTransfer,
   },
 })
 
@@ -33,7 +37,11 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
 </script>
 
 <template>
-  <div class="border bg-white rounded-lg border-accented flex flex-col min-h-0">
+  <div
+    ref="elementRef"
+    class="border bg-white rounded-lg border-accented flex flex-col min-h-0 transition-transform"
+    :class="{ '-translate-y-1 shadow-lg': isOvered }"
+  >
     <div class="p-5 flex items-center justify-between">
       <p class="text-xl font-semibold">
         {{ title[props.status] }}
@@ -44,7 +52,7 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
         :class="color[props.status]"
       >
         <p class="text-sm font-medium">
-          {{ tasks[props.status].length }}
+          {{ tasks.length }}
         </p>
       </div>
     </div>
@@ -58,17 +66,13 @@ const color: Record<'TODO' | 'DOING' | 'DONE', string> = {
         size="lg"
         label="Order Tasks"
       />
-      <div
-        ref="elementRef"
-        role="region"
-        aria-dropeffect="move"
-        class="grow overflow-y-auto space-y-4"
-        :class="{ 'bg-gray-100': isOvered }"
-      >
+
+      <div class="grow overflow-y-auto space-y-4">
         <task-item
-          v-for="(task) in tasks[props.status]"
+          v-for="(task, i) in props.tasks"
           :key="`task-${task.status}-${task.id}`"
           :task="task"
+          :index="i"
         />
       </div>
     </div>

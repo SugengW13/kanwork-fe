@@ -8,12 +8,21 @@ const props = defineProps({
     type: Object as PropType<Task | null>,
     default: null,
   },
+  tasks: {
+    type: Array as PropType<Task[]>,
+    deault: () => [],
+  },
+  index: Number,
 })
 
 const { isOpenModal, selectedTask } = useTask()
 
-const { elementRef, isDragging } = useDraggable({
-  id: props.task?.id || 'task',
+const { elementRef, isDragging, handleDragStart } = useDraggable({
+  groups: ['task'],
+  data: computed(() => ({
+    source: props.tasks,
+    index: props.index,
+  })),
 })
 
 const onClick = () => {
@@ -26,13 +35,11 @@ const onClick = () => {
   <div
     v-if="props.task"
     ref="elementRef"
-    tabindex="0"
-    role="button"
-    aria-grabbed="false"
     :aria-pressed="isDragging"
-    class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer hover:bg-black/5 transition select-none"
-    :class="{ 'bg-black/5': isDragging }"
-    @click.self="onClick"
+    class="border border-accented rounded-lg p-4 space-y-3 cursor-pointer bg-white hover:bg-black/5 transition select-none"
+    :class="{ 'bg-black/5!': isDragging }"
+    @click="onClick"
+    @pointerdown="handleDragStart"
   >
     <div class="flex items-center justify-between pointer-events-none">
       <p class="text-xl font-semibold">
