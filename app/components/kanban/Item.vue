@@ -19,6 +19,7 @@ const { isOpenModal, selectedTask } = useTask()
 const { elementRef, handleDragStart, isDragging } = useDraggable({
   groups: ['kanban'],
   data: computed(() => ({
+    task: props.task,
     source: props.tasks,
     index: props.index,
   })),
@@ -46,7 +47,10 @@ const onClick = () => {
       <task-priority-badge :priority="props.task.priority" />
     </div>
 
-    <p class="text-sm text-gray-500 line-clamp-2 text-justify pointer-events-none">
+    <p
+      v-if="props.task.description?.length"
+      class="text-sm text-gray-500 line-clamp-2 text-justify pointer-events-none"
+    >
       {{ props.task.description }}
     </p>
 

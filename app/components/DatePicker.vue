@@ -18,12 +18,12 @@ const convertToDateTime = (cd: undefined | CalendarDate, t: undefined | Time) =>
 
 const convertToCalendarDate = (d: undefined | Date) => {
   if (!d) return undefined
-  return new CalendarDate(d.getFullYear(), d.getMonth() + 1, d.getDate())
+  return new CalendarDate(new Date(d).getFullYear(), new Date(d).getMonth() + 1, new Date(d).getDate())
 }
 
 const convertToTime = (d: undefined | Date) => {
   if (!d) return undefined
-  return new Time(d.getHours(), d.getMinutes())
+  return new Time(new Date(d).getHours(), new Date(d).getMinutes())
 }
 
 const placeholder = computed(() => {

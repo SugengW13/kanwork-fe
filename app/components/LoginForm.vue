@@ -29,6 +29,7 @@ const form = reactive({
     >
       <u-input
         v-model="form.email"
+        type="email"
         placeholder="Enter your email"
         class="w-full"
       />

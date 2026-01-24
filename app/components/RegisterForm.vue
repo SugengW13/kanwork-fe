@@ -26,13 +26,12 @@ const form = reactive({
     <u-form-field
       required
       size="lg"
-      label="Email"
-      name="email"
+      label="Username"
+      name="username"
     >
       <u-input
-        v-model="form.email"
-        type="email"
-        placeholder="Enter your email"
+        v-model="form.username"
+        placeholder="Enter your username"
         class="w-full"
       />
     </u-form-field>
@@ -40,12 +39,13 @@ const form = reactive({
     <u-form-field
       required
       size="lg"
-      label="Username"
-      name="username"
+      label="Email"
+      name="email"
     >
       <u-input
-        v-model="form.username"
-        placeholder="Enter your username"
+        v-model="form.email"
+        type="email"
+        placeholder="Enter your email"
         class="w-full"
       />
     </u-form-field>
