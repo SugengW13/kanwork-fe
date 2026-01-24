@@ -1,4 +1,4 @@
-import { differenceInMinutes, differenceInSeconds } from 'date-fns'
+import { differenceInSeconds } from 'date-fns'
 
 export const useTask = () => {
   const isOpenModal = useState('task:is-open-modal', () => ({
@@ -99,6 +99,7 @@ export const useTask = () => {
 
       toast.success('Update Task Successful')
       isOpenModal.value.form = false
+      useDashboard().getTasks()
       getTasks()
     }
     catch (e) {
@@ -152,11 +153,16 @@ export const useTask = () => {
           break
       }
 
+      const duration = startedAt && finishedAt
+        ? differenceInSeconds(finishedAt, startedAt)
+        : 0
+
       taskStorage.value[taskIndex] = {
         ...task,
         status,
         startedAt,
         finishedAt,
+        duration,
       }
 
       getTasks()
@@ -176,8 +182,8 @@ export const useTask = () => {
 
     tasks.value.TODO.sort((a, b) => {
       const timeDiff = {
-        a: differenceInMinutes(new Date(a.deadlineAt), new Date()),
-        b: differenceInMinutes(new Date(b.deadlineAt), new Date()),
+        a: differenceInSeconds(new Date(a.deadlineAt), new Date()),
+        b: differenceInSeconds(new Date(b.deadlineAt), new Date()),
       }
 
       return (timeDiff.a * priorityPoint[a.priority]) - (timeDiff.b * priorityPoint[b.priority])

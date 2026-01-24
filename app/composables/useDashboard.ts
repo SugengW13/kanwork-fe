@@ -1,26 +1,47 @@
 export const useDashboard = () => {
   const tasks = useState<Task[]>('dashboard:tasks', () => [])
 
-  const getTasks = async () => {
-    tasks.value = []
+  const tasksDone = computed(() => {
+    return taskStorage.value.filter(t => t.status === 'DONE')
+  })
 
-    for (let i = 0; i < 5; i++) {
-      tasks.value.push({
-        id: `${i + 1}`,
-        title: `Task ${i + 1}`,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie venenatis lacinia. Pellentesque et dolor.',
-        status: 'DONE',
-        priority: 'LOW',
-        deadlineAt: new Date(),
-        startedAt: new Date(),
-        finishedAt: new Date(),
-        duration: 60 * 60 * (i + 1),
-      })
-    }
+  const totalTasks = computed(() => tasksDone.value.length)
+
+  const completionRate = computed(() => {
+    return (tasksDone.value.length / tasks.value.length) * 100
+  })
+
+  const averageDuration = computed(() => {
+    return tasksDone.value.reduce((sum, t) => sum + t.duration, 0) / tasksDone.value.length
+  })
+
+  const tasksByPriority = computed(() => {
+    return taskStorage.value.reduce((result: { low: number, medium: number, high: number }, task) => {
+      switch (task.priority) {
+        case 'LOW':
+          result.low += 1
+          break
+        case 'MEDIUM':
+          result.medium += 1
+          break
+        case 'HIGH':
+          result.high += 1
+          break
+      }
+      return result
+    }, { low: 0, medium: 0, high: 0 })
+  })
+
+  const getTasks = async () => {
+    tasks.value = taskStorage.value.filter(t => t.status === 'DONE')
   }
 
   return {
     tasks,
+    totalTasks,
+    completionRate,
+    averageDuration,
+    tasksByPriority,
     getTasks,
   }
 }

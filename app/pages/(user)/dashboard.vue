@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 
 const $route = useRoute()
 const $router = useRouter()
-const { tasks, getTasks } = useDashboard()
+const { tasks, totalTasks, completionRate, averageDuration, getTasks } = useDashboard()
 
 const date = ref<{
   start: undefined | Date
@@ -53,7 +53,7 @@ onMounted(async () => {
           icon="material-symbols:task-outline-rounded"
         >
           <p class="text-2xl font-bold">
-            10 Tasks
+            {{ totalTasks }} Tasks
           </p>
         </report-item>
 
@@ -62,7 +62,7 @@ onMounted(async () => {
           icon="material-symbols:check-circle-outline-rounded"
         >
           <p class="text-2xl font-bold">
-            100%
+            {{ completionRate }}%
           </p>
         </report-item>
 
@@ -71,7 +71,7 @@ onMounted(async () => {
           icon="material-symbols:timelapse-outline-rounded"
         >
           <p class="text-2xl font-bold">
-            1.5 Days
+            {{ secondsToDuration(averageDuration) }}
           </p>
         </report-item>
       </div>
