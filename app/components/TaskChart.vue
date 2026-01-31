@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
 
+const { tasksByPriority } = useDashboard()
+
 const chartTask = ref()
 
 onMounted(() => {
@@ -8,9 +10,13 @@ onMounted(() => {
     type: 'pie',
     data: {
       labels: ['Low', 'Medium', 'High'],
-      datasets: [
-        { data: [10, 10, 10] },
-      ],
+      datasets: [{
+        data: [
+          tasksByPriority.value.low,
+          tasksByPriority.value.medium,
+          tasksByPriority.value.high,
+        ],
+      }],
     },
     options: {
       plugins: {

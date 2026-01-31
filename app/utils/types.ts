@@ -8,8 +8,8 @@ export interface LoginForm {
 }
 
 export interface RegisterForm {
-  email: string
   username: string
+  email: string
   password: string
   passwordConfirmation: string
 }
@@ -25,6 +25,12 @@ export interface TaskForm {
 }
 
 // Server Response
+export interface User {
+  username: string
+  email: string
+  password: string
+}
+
 export interface Task {
   id: string
   title: string
@@ -35,4 +41,10 @@ export interface Task {
   startedAt?: Date
   finishedAt?: Date
   duration: number
+}
+
+export interface Kanban {
+  todo: Task[]
+  doing: Task[]
+  done: Task[]
 }

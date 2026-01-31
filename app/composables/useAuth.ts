@@ -4,20 +4,39 @@ export const useAuth = () => {
   }))
 
   const login = (form: LoginForm) => {
-    console.log('Login', form)
-    navigateTo('/dashboard')
-    toast.success('Login Successful')
+    try {
+      const isValidUser = (
+        form.email === userStorage.value?.email
+        && form.password === userStorage.value.password
+      )
+
+      if (!isValidUser)
+        throw new Error()
+
+      toast.success('Login Successful')
+      navigateTo('/dashboard')
+    }
+    catch {
+      toast.error('Login Failed')
+    }
   }
 
   const register = (form: RegisterForm) => {
-    console.log('Register', form)
-    toast.success('Register Successful')
+    try {
+      const { username, email, password } = form
+      userStorage.value = { username, email, password }
+
+      toast.success('Register Successful')
+      navigateTo('/login')
+    }
+    catch {
+      toast.error('Register Failed')
+    }
   }
 
   const logout = () => {
     isOpenModal.value.logout = false
 
-    console.log('Logout')
     navigateTo('/login')
     toast.success('Logout Successful')
   }

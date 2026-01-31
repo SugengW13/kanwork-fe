@@ -13,7 +13,7 @@ const props = defineProps({
   },
 })
 
-const { isOpenModal } = useTask()
+const { isOpenModal, updateStatus } = useTask()
 
 const { elementRef, isOvered } = useDroppable({
   groups: ['kanban'],
@@ -21,7 +21,15 @@ const { elementRef, isOvered } = useDroppable({
     source: props.tasks,
   })),
   events: {
-    onDrop: DnDOperations.applyTransfer,
+    onDrop: (store, payload) => {
+      const task: null | Task = payload.items[0]?.data?.task ?? null
+      if (!task) return
+
+      if (task.status !== props.status)
+        updateStatus(task.id, props.status)
+
+      DnDOperations.applyTransfer(store)
+    },
   },
 })
 
