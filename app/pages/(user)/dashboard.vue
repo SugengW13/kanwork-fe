@@ -51,7 +51,10 @@ onMounted(async () => {
     <empty-dashboard v-if="!hasAnyTasks" />
 
     <!-- Normal Dashboard: Show when tasks exist -->
-    <div v-else class="space-y-8 flex flex-col min-h-0 grow">
+    <div
+      v-else
+      class="space-y-8 flex flex-col min-h-0 grow"
+    >
       <div class="grid grid-cols-3 gap-8">
         <report-item
           title="Total Tasks"
