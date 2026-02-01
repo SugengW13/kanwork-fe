@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 
 const $route = useRoute()
 const $router = useRouter()
-const { tasks, totalTasks, completionRate, averageDuration, getTasks } = useDashboard()
+const { tasks, totalTasks, hasAnyTasks, completionRate, averageDuration, getTasks } = useDashboard()
 
 const date = ref<{
   start: undefined | Date
@@ -40,13 +40,18 @@ onMounted(async () => {
     <page-header title="Dashboard">
       <template #suffix>
         <date-range-picker
+          v-if="hasAnyTasks"
           v-model="date"
           class="w-xs"
         />
       </template>
     </page-header>
 
-    <div class="space-y-8 flex flex-col min-h-0 grow">
+    <!-- Empty State: Show when no tasks -->
+    <empty-dashboard v-if="!hasAnyTasks" />
+
+    <!-- Normal Dashboard: Show when tasks exist -->
+    <div v-else class="space-y-8 flex flex-col min-h-0 grow">
       <div class="grid grid-cols-3 gap-8">
         <report-item
           title="Total Tasks"
